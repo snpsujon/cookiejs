@@ -1,155 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Set and Get Cookies in JavaScript</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<style>
-    #chkcookie{
-        color: red;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNP Sujon</title>
+    <link rel="stylesheet" href="stylr.css">
 </head>
+
 <body>
-        <small id="chkcookie"></small>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary" id="submit">createcookie</button>
-        <button type="submit" class="btn btn-primary" id="del">deletecooke</button>
-        <button type="submit" class="btn btn-primary" id="setdata">Set Data</button>
-        <button type="submit" class="btn btn-primary" id="login">Login</button>
-
-        <h1 id="test"></h1>
-
-
-
-
-
-
-
-
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="/snpcookie.js"></script>
+    <div id="myForm" class="myForm">
+        <h1>LogIn Now;;; ghfjhjh!</h1>
+        <input type="text" id="user" onkeypress="enterkey(event)" class="jj" placeholder="User name">
+        <i id="icon" class="far fa-eye"></i>
+        <input id="password" type="password" onkeypress="enterkey(event)" class="jj" placeholder="Password">
+        <button type="submit" id="submit"><i class="fab fa-telegram-plane"></i> SUBMIT</button>
+    </div>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
+        var myInput = document.getElementById('password'),
+    myIcon = document.getElementById('icon');
+
+myInput.onfocus = function () {
+  myIcon.style.right = '3px'
+}
+
+myInput.onblur = function () {
+  myIcon.style.right = '14px'
+}
+
+myIcon.onclick = function () {
 
 
 
+  if (myIcon.classList.contains('fa-eye')) {
 
+    this.classList.toggle('fa-eye-slash');
+    this.classList.toggle('fa-eye');
 
-        $(document).ready(function(){
-            $('#submit').click(function(){
-                var cookie = $('#exampleInputEmail1').val()+"&split&"+$('#exampleInputPassword1').val();
-                //var encode = encodeURIComponent(cookie);
-                setCookie("usercookie", cookie, 1);
-                localStorage.setItem("lastname", "Smith");
-                location.reload();
-
-            });
-            
-            
-            $('#del').click(function(){
-                var firstName = prompt("Please enter your DELETE name:");
-                deleteCookie(firstName);
-                location.reload();
-                
-            });
-            $('#login').click(function(){
-                var cookie = $('#exampleInputEmail1').val()+"&split&"+$('#exampleInputPassword1').val();
-                //var encode = encodeURIComponent(cookie);
-                setCookie("usercookie", cookie, 1);
-                localStorage.setItem("login", "OK");
-                location.reload();
-                
-                
-                
-                
-            });
-
-
-            $('#setdata').click(function(){
-                
-                var firstName = prompt("Please enter your cookie name:");
-                
-                var data =  getCookie(firstName);
-                if(data!=null){
-                    var splitdata = data.split("&split&");
-                    $('#exampleInputEmail1').val(splitdata[0]);
-                    $('#exampleInputPassword1').val(splitdata[1]);
-                }
-                else{
-                    alert("No Data Available!!");
-                }
-                
-            });
-
-            function Sitevisited(){
-                var data =  getCookie("usercookie");
-                if(data!=null){
-                    $('#chkcookie').html("**You Have 1 Local Saved Data");
-                    
-                    var splitdata = data.split("&split&");
-                    var user = (splitdata[0]);
-                    var pass = (splitdata[1]);
-                    if(user == 'snpsujon'&& pass=='123'){
-                        window.location = "/final.html";
-                    }
-                    else{
-                        alert("please Login");
-                    }
-                    
-                }
-                else{
-                    $('#chkcookie').html("**You Have no Local Saved Data");
-                }
-                debugger;
-                var visit = parseInt(0);
-                visit = getCookie("totalvisit");
-                if(visit != null){
-                    visit = parseInt(visit)+parseInt(1);
-                    setCookie("totalvisit", visit, 365);
-                    $('#test').html(visit);
-                }
-                else{
-                    visit = parseInt(1);
-                    setCookie("totalvisit", visit, 365);
-                    $('#test').html(visit);
-                }
-            }
-
-            window.onload = Sitevisited;
-            
-            
+    myInput.setAttribute('type', 'text');
 
 
 
-
-        });
-
+  } else {
 
 
-	// Uncomment the following line to delete this cookie
-	// setCookie("firstName", "", 0);
+    myInput.setAttribute('type', 'password');
 
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+
+  };
+}
+
+var submit = document.getElementById('submit');
+var user = document.getElementById('user');
+var password = document.getElementById('password');
+
+submit.onclick = function(){
+  
+  if((user.value != "") && (password.value != "")){
+    if(user.value == 'snp' && password.value == '123'){
+      alert('Login Done');
+    }
+    else{
+      alert('wrong');
+    }
+  }
+  else{
+    alert('Please Enter user or password');
+  }
+  
+}
+function enterkey(e){
+  var key = e.keyCode || e.which;
+  var inputs = document.querySelectorAll("input");
+  
+  if(key == 13){
+    var index = $('.ui-dform-text').index(this) + 1;
+                $('.ui-dform-text').eq(index).focus();
+        var index = document.getElementsByClassName('jj').index(this) +1;
+        
+        document.getElementsByClassName('jj').eq(index).focus();
+    submit.onclick();
+    
+}
+}
 
     </script>
-    
 </body>
 </html>
